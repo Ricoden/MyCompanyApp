@@ -13,23 +13,10 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    final String ATTRIBUTE_NAME_NAME = "name";
-    final String ATTRIBUTE_NAME_POSITION = "pos";
-    final String ATTRIBUTE_NAME_CITY = "city";
-    final String ATTRIBUTE_NAME_FOLLOWERS = "follow";
-    final String ATTRIBUTE_NAME_IMAGE = "image";
+    ArrayList<Employee> employees = new ArrayList();
 
-    ListView lvSimple;
-    TextView tvAdd;
+    ListView lvEmployees;
 
-    // массивы данных
-    String[] names = { "John Silverstain", "Pam Tailor", "Casy Niman",
-            "George Tach", "Cristina Maciel", "Simon Deuva" };
-    String[] positions = { "Marketing", "Design", "Accounts",
-            "Design", "Mobile Dev.", "Media" };
-    String[] cities = { "Melbourne", "Sidney", "Hobart",
-            "Newcstle", "Hobart", "Melbourne" };
-    int[] followers = { 243, 24, 257, 127, 80, 420};
     int img = R.drawable.ic_launcher_background;
 
     @Override
@@ -37,41 +24,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        tvAdd = findViewById(R.id.tvAdd);
-        tvAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
-        // упаковываем данные в понятную для адаптера структуру
-        ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>(
-                names.length);
-        Map<String, Object> m;
-        for (int i = 0; i < names.length; i++) {
-            m = new HashMap<String, Object>();
-            m.put(ATTRIBUTE_NAME_NAME, names[i]);
-            m.put(ATTRIBUTE_NAME_POSITION, positions[i]);
-            m.put(ATTRIBUTE_NAME_CITY, cities[i]);
-            m.put(ATTRIBUTE_NAME_FOLLOWERS, followers[i]+" Followers");
-            m.put(ATTRIBUTE_NAME_IMAGE, img);
-            data.add(m);
+        if (employees.size()==0){
+            employees.add(new Employee("John Silverstain","Marketing",
+                    "Melbourne", 243, img));
+            employees.add(new Employee("Pam Tailor","Design",
+                    "Sidney", 24, img));
+            employees.add(new Employee("Casy Niman","Accounts",
+                    "Hobart", 257, img));
+            employees.add(new Employee("George Tach","Design",
+                    "Newcstle", 127, img));
+            employees.add(new Employee("Cristina Maciel","Mobile Dev.",
+                    "Hobart", 80, img));
+            employees.add(new Employee("Simon Deuva","Media",
+                    "Melbourne", 420, img));
+
         }
 
-        // массив имен атрибутов, из которых будут читаться данные
-        String[] from = { ATTRIBUTE_NAME_NAME, ATTRIBUTE_NAME_POSITION, ATTRIBUTE_NAME_CITY,
-                ATTRIBUTE_NAME_FOLLOWERS, ATTRIBUTE_NAME_IMAGE };
-        // массив ID View-компонентов, в которые будут вставлять данные
-        int[] to = { R.id.tvNameSurname, R.id.tvPosition, R.id.tvCity, R.id.tvFollowers, R.id.imgViewPhoto };
-
-        // создаем адаптер
-        SimpleAdapter sAdapter = new SimpleAdapter(this, data, R.layout.item,
-                from, to);
-
-        // определяем список и присваиваем ему адаптер
-        lvSimple = (ListView) findViewById(R.id.lvSimple);
-        lvSimple.setAdapter(sAdapter);
+        lvEmployees = findViewById(R.id.lvEmployees);
+        EmployeeAdapter adapter = new EmployeeAdapter(this, R.layout.item, employees);
+        lvEmployees.setAdapter(adapter);
     }
 }
