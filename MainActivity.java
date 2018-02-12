@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView lvEmployees;
 
-    int img = R.drawable.ic_launcher_background;
+   // int img = R.drawable.1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +28,17 @@ public class MainActivity extends AppCompatActivity {
 
         if (employees.size()==0){
             employees.add(new Employee("John Silverstain","Marketing",
-                    "Melbourne", 243, img));
+                    "Melbourne", 243, R.drawable.photo1));
             employees.add(new Employee("Pam Tailor","Design",
-                    "Sidney", 24, img));
+                    "Sidney", 24, R.drawable.photo5));
             employees.add(new Employee("Casy Niman","Accounts",
-                    "Hobart", 257, img));
+                    "Hobart", 257, R.drawable.photo4));
             employees.add(new Employee("George Tach","Design",
-                    "Newcstle", 127, img));
+                    "Newcstle", 127, R.drawable.photo6));
             employees.add(new Employee("Cristina Maciel","Mobile Dev.",
-                    "Hobart", 80, img));
+                    "Hobart", 80, R.drawable.photo2));
             employees.add(new Employee("Simon Deuva","Media",
-                    "Melbourne", 420, img));
+                    "Melbourne", 420, R.drawable.photo3));
 
         }
 
